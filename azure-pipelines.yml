@@ -8,11 +8,6 @@ trigger:
 
 variables:
 
-  # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: 'service contion to manual'
-  
-  # Web app name
-  webAppName: 'javawebapp1226'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -66,8 +61,8 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure Web App Deploy: gs-spring-boot'
             inputs:
-              azureSubscription: '$(azureSubscription)'
+              azureSubscription: 'connection to rg'
               appType: 'webApp'
-              appName: '$(webAppName)'
+              appName: 'javawebapp1226'
               package: '$(System.ArtifactsDirectory)/drop/**/target/*.?(war|jar)'
               deploymentMethod: 'auto'
