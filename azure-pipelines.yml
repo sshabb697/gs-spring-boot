@@ -22,10 +22,23 @@ stages:
       vmImage: $(vmImageName)
     
     steps:
+    - task: SonarQubePrepare@5
+      displayName: PrepareSonaranalysis
+      inputs:
+        SonarQube: 'connetion2sonarqube'
+        scannerMode: 'Other'
     - task: Maven@3
       displayName: 'Maven Package'
       inputs:
         mavenPomFile: 'app/pom.xml'
+    - task: SonarQubeAnalyze@5
+      displayName: RunSonarAnalysis
+      inputs:
+        jdkversion: 'JAVA_HOME_11_X64'
+    - task: SonarQubePublish@5
+      displayName: PublishResult
+      inputs:
+        pollingTimeoutSec: '300'
 
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
