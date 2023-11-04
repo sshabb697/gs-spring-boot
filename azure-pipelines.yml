@@ -61,8 +61,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure Web App Deploy: gs-spring-boot'
             inputs:
-              azureSubscription: 'connection to rg'
-              appType: 'webApp'
-              appName: 'javawebapp1226'
+              azureSubscription: 'connection azure portal(manual)'
+              appType: 'webAppLinux'
+              appName: 'javaapp1226'
               package: '$(System.ArtifactsDirectory)/drop/**/target/*.?(war|jar)'
-              deploymentMethod: 'auto'
